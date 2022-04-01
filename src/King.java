@@ -12,12 +12,10 @@ public class King extends ChessPiece {
     public boolean canMoveToPosition(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
         if (checkPitchPoint(chessBoard, line, column, toLine, toColumn)) {
             if (checkErrorStep(line, column, toLine, toColumn)) {
-                if (attack(chessBoard, line, column, toLine, toColumn)) {
-                    if (movement(chessBoard, line, column, toLine, toColumn)) {
-                        return crossing(chessBoard, line, column, toLine, toColumn);
-                    }
-                } else return false;
-            } else return false;
+                if (movement(chessBoard, line, column, toLine, toColumn)) {
+                    return crossing(chessBoard, line, column, toLine, toColumn);
+                }
+            }
         }
         return false;
     }
@@ -46,15 +44,18 @@ public class King extends ChessPiece {
 
     @Override
     public boolean movement(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
-            if (Math.abs(toLine - line) == Math.abs(toColumn - column)) {
-                return true;
-            } else if (line == toLine || column == toColumn) {
-                if (line == toLine && column != toColumn) {
-                    return true;
-                } else if (line != toLine && column == toColumn) {
-                    return true;
-                }
-            }
-        return false;
+        if (Math.abs(line - toLine) > 1 || Math.abs(column - toColumn) > 1){
+            return false;
+        }
+
+        if (isUnderAttack(chessBoard, toLine, toColumn)){
+            return false;
+        }
+
+        if (chessBoard.board[toLine][toColumn] != null) {
+            return !chessBoard.board[toLine][toColumn].getColor().equals(color);
+        }
+
+        return true;
     }
 }

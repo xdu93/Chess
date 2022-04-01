@@ -1,7 +1,7 @@
 public interface MoveAble {
 
     default boolean checkErrorStep(int line, int column, int toLine, int toColumn) {
-        return (line != toLine && column != toColumn) ? true : false;
+        return (line == toLine && column == toColumn) ? false : true;
     }
 
     default boolean attack(ChessBoard chessBoard, int line, int column, int toLine, int toColumn) {
