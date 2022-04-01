@@ -1,4 +1,4 @@
-public abstract class ChessPiece {
+public abstract class ChessPiece implements MoveAble {
     String color;
     boolean check;
 

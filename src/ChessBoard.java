@@ -94,7 +94,7 @@ public class ChessBoard {
         }
     }
 
-    public boolean castling7(){
+    public boolean castling7() {
         if (nowPlayer.equals("White")) {
             if (board[0][7] == null || board[0][4] == null) return false;
             if (board[0][7].getSymbol().equals("R") && board[0][4].getSymbol().equals("K") && // check that King and Rook
@@ -130,5 +130,17 @@ public class ChessBoard {
                 } else return false;
             } else return false;
         }
+    }
+
+    public boolean hit(int line, int column, int toLine, int toColumn) {
+        if (board[toLine][toColumn] == null ||
+                board[line][column].getColor() != board[toLine][toColumn].getColor()) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean cross(int line, int column, int toLine, int toColumn){
+        return false;
     }
 }
